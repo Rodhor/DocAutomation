@@ -1,9 +1,11 @@
 MDFloatLayout:
 
   MDTopAppBar:
-    id: new_particpant_label
-    title: "[u][b][size=48]Create new Participant[/size][/b][/u]"
+    title: "[u][b][size=38]Create new Participant[/size][/b][/u]"
     pos_hint: {"top": 1}
+    icon: "cogs"
+    type: "top"
+    right_action_items: [["cogs", lambda x: x]]
 
   MDTabs:
     id: tabs
@@ -36,7 +38,7 @@ MDFloatLayout:
           spacing: "10dp"
       MDRoundFlatIconButton:
         icon: "animation"
-        text:"test"
+        text:"test2"
         pos_hint: {"x": .1, "y": .16}
         on_release: app.switch_tab_by_object()
 
@@ -48,8 +50,11 @@ MDFloatLayout:
     elevation_normal: 12
     pos_hint: {"x": .45, "y": .04}
 
-
 <Test>
   TextField:
     pos_hint: {"center_x": .5, "center_y": .5}
     size_hint_x: .5
+
+
+<DialogTagSettings>
+  

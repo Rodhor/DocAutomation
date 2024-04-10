@@ -1,11 +1,10 @@
 MDFloatLayout:
-
   MDTopAppBar:
     title: "[u][b][size=38]Create new Participant[/size][/b][/u]"
     pos_hint: {"top": 1}
     icon: "cogs"
     type: "top"
-    right_action_items: [["cogs", lambda x: x]]
+    right_action_items: [["cogs", lambda x: app.show_tags_settings()]]
 
   MDTabs:
     id: tabs
@@ -26,7 +25,6 @@ MDFloatLayout:
         pos_hint: {"x": .1, "y": .16}
         on_release: app.switch_tab_by_object()
 
-
     Tab:
       title: "Tab 2"
       ScrollView:
@@ -42,9 +40,6 @@ MDFloatLayout:
         pos_hint: {"x": .1, "y": .16}
         on_release: app.switch_tab_by_object()
 
-
-
-
   MDFloatingActionButton:
     icon: "content-save-outline"
     elevation_normal: 12
@@ -56,5 +51,56 @@ MDFloatLayout:
     size_hint_x: .5
 
 
-<DialogTagSettings>
-  
+<TagSettingsScreen>:
+  orientation: "vertical"
+  size_hint_y: None
+  height: 103
+
+  GridLayout:
+    id: Grid
+    height: 103
+    spacing: "10dp"
+    rows: 1
+
+    MDTextField:
+      id: Tag
+      required: True
+      hint_text: "Add tag..."
+      pos_hint: {"center_y": 0.4}
+      max_text_length: 20
+      spacing: "10dp"
+
+    MDTextField:
+      id: Tag_meaning
+      required: True
+      hint_text: "Add tag name..."
+      pos_hint:{"center_y": 0.4}
+      max_text_length: 30
+
+    MDTextField:
+      id: Tag_description
+      required: True
+      multiline: True
+      hint_text: "Add tag description..."
+      pos_hint:{"center_y": 0.4}
+      max_text_length: 200
+
+  BoxLayout:
+    orientation: "horizontal"
+
+    MDRaisedButton:
+      text: "SAVE"
+      on_release: (app.add_tag(Tag.text, Tag_meaning.text,Tag_description.text))
+
+    MDFlatButton:
+      text: "CLOSE"
+      on_release: app.close_dialog()
+
+<TagListItem>:
+  id: the_list_item
+  markup: True
+
+  IconRightWidget:
+    icon: "trash-can-outline"
+    theme_text_color: "Custom"
+    text_color: 1, 0, 0, 1

@@ -23,6 +23,7 @@ class TestLayout(MDGridLayout):
 
 
 class MainApp(MDApp):
+
     def focus_next(self, next_field):
         if next_field:
             next_field.focus = True

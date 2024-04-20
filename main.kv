@@ -1,0 +1,94 @@
+<Screen1>:
+    MDFloatLayout:
+        MDTopAppBar:
+            title: "DocAutomation"
+            pos_hint: {"center_x": .5, "top": 1}
+            elevation: 10
+            right_action_items:
+                [
+                ["tag-multiple"],
+                ["form-textbox-password"],
+                ["cogs"]
+                ]
+        MDTabs:
+            id: tabs
+            pos_hint: {"top": .9}
+            tab_bar_height: "25dp"
+
+<Screen2>:
+    MDFloatLayout:
+        MDTextField:
+            size_hint: 1, .1
+            pos_hint: {"center_x": .5, "center_y": .9}
+            hint_text: "Tag"
+            id: tag_field
+        MDTextField:
+            size_hint: 1, .1
+            pos_hint: {"center_x": .5, "center_y": .8}
+            hint_text: "Meaning"
+            id: meaning_field
+        MDTextField:
+            size_hint: 1, .1
+            pos_hint: {"center_x": .5, "center_y": .7}
+            hint_text: "Description"
+            id: description_field
+        MDRaisedButton:
+            text: "Submit"
+            on_release: root.add_new_tag()
+            size_hint: .2, .1
+            pos_hint: {"right": 1, "center_y": .9}
+        ScrollView:
+            size_hint: 1, .8
+            pos_hint: {"center_y": .5}
+            MDList:
+                id: taglist
+
+<Screen3>:
+    MDFloatLayout:
+        MDTextField:
+            size_hint: 1, .1
+            pos_hint: {"center_x": .5, "center_y": .9}
+            hint_text: "Category"
+            id: category_field
+        MDTextField:
+            size_hint: 1, .1
+            pos_hint: {"center_x": .5, "center_y": .8}
+            hint_text: "Description"
+            id: category_description_field
+        MDRaisedButton:
+            text: "Submit"
+            on_release: root.add_new_category()
+            size_hint: .2, .1
+            pos_hint: {"right": 1, "center_y": .9}
+        ScrollView:
+            size_hint: 1, .8
+            pos_hint: {"center_y": .5}
+            MDList:
+                id: categorylist
+
+<IndividualTab>:
+    MDFloatLayout:
+        ScrollView:
+            pos_hint: {"center_x": .5, "center_y": .58}
+            size_hint: .9, .8
+            MDGridLayout:
+                id: container
+                cols: 2
+                spacing: "10dp"
+                MDTextField:
+                    id: tag_field
+                    hint_text: "Tag"
+                MDTextField:
+                    id: tag_fieldasd
+                    hint_text: "Tag"
+                MDTextField:
+                    id: tag_fieldqwe
+                    hint_text: "Tag"
+        MDRoundFlatIconButton:
+            icon: "animation"
+            text:"Previous"
+            pos_hint: {"x": .05, "y": .16}
+        MDRoundFlatIconButton:
+            icon: "animation"
+            text:"Next"
+            pos_hint: {"x": .85, "y": .16}

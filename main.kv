@@ -6,9 +6,9 @@
             elevation: 10
             right_action_items:
                 [
-                ["tag-multiple"],
-                ["form-textbox-password"],
-                ["cogs"]
+                ["tag-multiple", lambda x: app.change_tags(), "Change Tags"],
+                ["form-textbox-password", lambda x: app.change_categories(), "Change Categories"],
+                ["cogs", lambda x: app_change_templates_path, "Change templates path"]
                 ]
         MDTabs:
             id: tabs
@@ -17,28 +17,29 @@
 
 <Screen2>:
     MDFloatLayout:
-        MDTextField:
-            size_hint: 1, .1
-            pos_hint: {"center_x": .5, "center_y": .9}
-            hint_text: "Tag"
-            id: tag_field
-        MDTextField:
-            size_hint: 1, .1
-            pos_hint: {"center_x": .5, "center_y": .8}
-            hint_text: "Meaning"
-            id: meaning_field
-        MDTextField:
-            size_hint: 1, .1
-            pos_hint: {"center_x": .5, "center_y": .7}
-            hint_text: "Description"
-            id: description_field
+        MDGridLayout:
+            id: new_tag_grid
+            cols: 3
+            spacing: 10
+            size_hint: .8, .2
+            pos_hint: {"center_x": .44, "center_y": .85}
+
+            MDTextField:
+                hint_text: "Tag"
+                id: tag_field
+            MDTextField:
+                hint_text: "Meaning"
+                id: meaning_field
+            MDTextField:
+                hint_text: "Description"
+                id: description_field
         MDRaisedButton:
             text: "Submit"
-            on_release: root.add_new_tag()
-            size_hint: .2, .1
-            pos_hint: {"right": 1, "center_y": .9}
+            pos_hint: {"right": 0.97, "center_y": .9}
+            on_release: app.add_new_tag(tag_field.text, meaning_field.text, description_field.text)
+
         ScrollView:
-            size_hint: 1, .8
+            size_hint: .9, .6
             pos_hint: {"center_y": .5}
             MDList:
                 id: taglist
@@ -75,15 +76,7 @@
                 id: container
                 cols: 2
                 spacing: "10dp"
-                MDTextField:
-                    id: tag_field
-                    hint_text: "Tag"
-                MDTextField:
-                    id: tag_fieldasd
-                    hint_text: "Tag"
-                MDTextField:
-                    id: tag_fieldqwe
-                    hint_text: "Tag"
+
         MDRoundFlatIconButton:
             icon: "animation"
             text:"Previous"
@@ -92,3 +85,21 @@
             icon: "animation"
             text:"Next"
             pos_hint: {"x": .85, "y": .16}
+
+<TagListItem>
+    orientation: 'horizontal'
+    size_hint_y: None
+
+    GridLayout:
+        cols: 4
+        size_hint_y: None#
+        height: self.minimum_height
+
+        MDLabel:
+            text: root.tag
+        MDLabel:
+            text: root.meaning
+        MDLabel:
+            text: root.description
+        IconRightWidget:
+            icon: "android"

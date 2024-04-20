@@ -1,0 +1,111 @@
+
+<MainScreen>:
+MDFloatLayout:
+  MDTopAppBar:
+    title: "[u][b][size=38]Create new Participant[/size][/b][/u]"
+    pos_hint: {"top": 1}
+    icon: "cogs"
+    type: "top"
+    right_action_items: [["tag-multiple", lambda x: app.show_category_settings()],["form-textbox-password", lambda x: app.show_tag_setings()]]
+
+  MDTabs:
+    id: tabs
+    pos_hint: {"top": .9}
+
+    Tab:
+      title: "Tab 1"
+      ScrollView:
+        pos_hint: {"center_x": .5, "center_y": .58}
+        size_hint: .9, .8
+        MDGridLayout:
+          id: container
+          cols: 2
+          spacing: "10dp"
+      MDRoundFlatIconButton:
+        icon: "animation"
+        text:"test"
+        pos_hint: {"x": .1, "y": .16}
+        on_release: app.switch_tab_by_object()
+
+    Tab:
+      title: "Tab 2"
+      ScrollView:
+        pos_hint: {"center_x": .5, "center_y": .58}
+        size_hint: .9, .8
+        MDGridLayout:
+          id: containertwo
+          cols: 2
+          spacing: "10dp"
+      MDRoundFlatIconButton:
+        icon: "animation"
+        text:"test2"
+        pos_hint: {"x": .1, "y": .16}
+        on_release: app.switch_tab_by_object()
+
+  MDFloatingActionButton:
+    icon: "content-save-outline"
+    elevation_normal: 12
+    pos_hint: {"x": .45, "y": .04}
+
+<CategorySettingsScreen>:
+
+
+<Tag_settings_layout>:
+  size_hint: None, None
+  size: 520, 500
+
+  MDBoxLayout:
+    orientation: "vertical"
+
+    GridLayout:
+      id: Grid
+      size_hint_y: None
+      height: root.height * 0.2  # Adjust the height as needed
+      spacing: "10dp"
+      rows: 1
+
+      MDTextField:
+        id: Tag
+        required: True
+        hint_text: "Add tag..."
+        max_text_length: 15
+        spacing: "10dp"
+
+      MDTextField:
+        id: Tag_meaning
+        required: True
+        hint_text: "Add tag name..."
+        max_text_length: 30
+        spacing: "10dp"
+
+      MDTextField:
+        id: Tag_description
+        required: True
+        multiline: True
+        hint_text: "Add tag description..."
+        max_text_length: 200
+        spacing: "20dp"
+
+      MDRoundFlatButton:
+        text: "Add"
+        on_release: app.add_tag(Tag.text, Tag_meaning.text, Tag_description.text)
+
+    ScrollView:
+      id: taglist
+      size_hint_y: 0.8
+      height: root.height - Grid.height - dp(80)  # Adjust the height as needed
+      pos_hint: {"center_x": .5}
+
+    MDFloatingActionButton:
+      icon: "content-save-outline"
+      elevation_normal: 12
+      pos_hint: {"x": .45, "y": .04}
+
+<ListItem>:
+  id: the_list_item
+  markup: True
+
+  IconRightWidget:
+    icon: "trash-can-outline"
+    theme_text_color: "Custom"
+    text_color: 1, 0, 0, 1

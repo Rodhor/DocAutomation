@@ -1,4 +1,4 @@
-<Screen1>:
+<MainScreen>:
     MDFloatLayout:
         MDTopAppBar:
             title: "DocAutomation"
@@ -15,7 +15,7 @@
             pos_hint: {"top": .9}
             tab_bar_height: "25dp"
 
-<Screen2>:
+<TagSettingsScreen>:
     MDFloatLayout:
         MDGridLayout:
             id: new_tag_grid
@@ -25,26 +25,31 @@
             pos_hint: {"center_x": .44, "center_y": .85}
 
             MDTextField:
-                hint_text: "Tag"
                 id: tag_field
+                hint_text: "Tag"
             MDTextField:
-                hint_text: "Meaning"
-                id: meaning_field
+                id: type_field
+                hint_text: "Type"
             MDTextField:
-                hint_text: "Description"
                 id: description_field
+                hint_text: "Description"
+                
         MDRaisedButton:
             text: "Submit"
             pos_hint: {"right": 0.97, "center_y": .9}
-            on_release: app.add_new_tag(tag_field.text, meaning_field.text, description_field.text)
+            on_release: app.add_new_tag(tag_field.text, type_field.text, description_field.text)
 
         ScrollView:
             size_hint: .9, .6
             pos_hint: {"center_y": .5}
             MDList:
                 id: taglist
+        MDFloatingActionButton:
+            icon: "floppy"
+            pos_hint: {"x": .5, "y": .05}
+            on_release: app.root.current = "MainScreen"
 
-<Screen3>:
+<CategorySettingsScreen>:
     MDFloatLayout:
         MDTextField:
             size_hint: 1, .1
@@ -86,20 +91,14 @@
             text:"Next"
             pos_hint: {"x": .85, "y": .16}
 
-<TagListItem>
-    orientation: 'horizontal'
-    size_hint_y: None
+<TagListItem>:
+    id: the_tag_list_item
 
-    GridLayout:
-        cols: 4
-        size_hint_y: None#
-        height: self.minimum_height
+    IconLeftWidget:
+        icon: "tag"
+        theme_text_color: "Custom"
 
-        MDLabel:
-            text: root.tag
-        MDLabel:
-            text: root.meaning
-        MDLabel:
-            text: root.description
-        IconRightWidget:
-            icon: "android"
+    IconRightWidget:
+        icon: "trash-can-outline"
+        theme_text_color: "Custom"
+        text_color: 1, 0, 0, 1
